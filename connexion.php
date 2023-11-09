@@ -5,16 +5,14 @@
     if(!empty($_POST['email']) && !empty($_POST['motdepasse'])) // Si il existe les champs email, password et qu'il sont pas vident
     {
         // Patch XSS
-        $pseudo = htmlspecialchars($_POST['pseudo']);
         $email = htmlspecialchars($_POST['email']); 
         $motdepasse = htmlspecialchars($_POST['motdepasse']);
         
         $email = strtolower($email); // email transformé en minuscule
         
         // On regarde si l'utilisateur est inscrit dans la table utilisateurs
-        $check = $bdd->prepare('SELECT pseudo, adresse_email, mot_de_passe,token FROM personne WHERE pseudo = ?');
-        $check->execute(array($pseudo));
-        $data = $check->fetch();
+        $check = $bdd->prepare('SELECT pseudo, adresse_mail, mot_de_passe,token FROM utilisateurs WHERE adresse_mail = ?');
+        $check->execute(array($email));
         $row = $check->rowCount();
         
         
