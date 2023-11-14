@@ -14,6 +14,7 @@
         $check = $bdd->prepare('SELECT pseudo, adresse_mail, mot_de_passe,token FROM utilisateurs WHERE adresse_mail = ?');
         $check->execute(array($email));
         $row = $check->rowCount();
+        $data = $check->fetch(); 
         
         
 
